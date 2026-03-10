@@ -1,0 +1,19 @@
+{
+  "compilerOptions": {
+    "target": "ESNext",
+    "module": "commonjs",
+    "moduleResolution": "node",
+    "strict": true,
+    "esModuleInterop": true,
+    "baseUrl": ".",
+    "paths": {
+      "@fixtures/*": ["./fixtures/*"],
+      "@constants/*": ["./constants/*"],
+      "@mocks/*": ["./mocks/*"],
+      "@pages/*": ["./pages/*"],
+      "@tests/*": ["./tests/*"],
+      "@app/*": ["./app/*"]
+    }
+  },
+  "include": ["**/*.ts"]
+}

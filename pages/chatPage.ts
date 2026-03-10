@@ -5,7 +5,10 @@ export class ChatPage {
     this.page = page;
   }
 
-  // Element locators
+  async navigate() {
+    await this.page.goto('/dummy-messaging-app.html');
+  }
+
   get messageInput(): Locator {
     return this.page.locator('#messageInput');
   }
@@ -24,10 +27,6 @@ export class ChatPage {
 
   get messages(): Locator {
     return this.page.locator('#messageList li');
-  }
-
-  async navigate() {
-    await this.page.goto('/dummy-messaging-app.html');
   }
 
   async typeMessage(text: string) {

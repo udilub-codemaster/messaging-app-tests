@@ -1,5 +1,5 @@
 import { test as baseTest } from '@playwright/test';
-import { ChatPage } from '../pages/chatPage';
+import { ChatPage } from '@pages/chatPage';
 
 export type myFixtures = {
     chatPage: ChatPage;
