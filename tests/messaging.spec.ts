@@ -1,20 +1,10 @@
-import { test, expect } from '@playwright/test';
-import { ChatPage } from '../pages/chatPage';
+import { test, expect } from '../fixtures/baseTest';
 import { messagingConsts } from '../constants/messagingConsts';
 import { setupMessageSendMock } from '../mocks/messageSendMock';
 
 
-
-
-test.beforeEach(async ({ page }) => {
-    const chatPage = new ChatPage(page);
-    await chatPage.navigate();
-});
-
-
 test.describe('Messaging App Tests', () => {
-    test('Validate ui elements initial state', async ({ page }) => {
-        const chatPage = new ChatPage(page);
+    test('Validate ui elements initial state', async ({ page, chatPage }) => {
         await expect(page).toHaveTitle('Dummy Messaging App');
         await expect(chatPage.messageInput).toBeVisible();
         await expect(chatPage.sendButton).toBeEnabled();
@@ -23,8 +13,7 @@ test.describe('Messaging App Tests', () => {
         const placeholder = await chatPage.getMessageInputPlaceholder();
         expect(placeholder).toBe(messagingConsts.MESSAGE_INPUT_PLACEHOLDER);
     });
-    test('Validate successful message send', async ({ page }) => {
-        const chatPage = new ChatPage(page);
+    test('Validate successful message send', async ({ page, chatPage }) => {
         await setupMessageSendMock(page, { success: true });
         await chatPage.typeMessage('This is a valid test message');
         await chatPage.clickSend();
@@ -32,8 +21,7 @@ test.describe('Messaging App Tests', () => {
         const messages = await chatPage.getMessages();
         expect(messages[0]).toBe('This is a valid test message');
     });
-    test('Validate multiple message send', async ({ page }) => {
-        const chatPage = new ChatPage(page);
+    test('Validate multiple message send', async ({ page, chatPage }) => {
         await setupMessageSendMock(page, { success: true });
         await chatPage.typeMessage('This is a valid test message');
         await chatPage.clickSend();
@@ -45,8 +33,7 @@ test.describe('Messaging App Tests', () => {
         expect(messages[0]).toBe('This is a valid test message');
         expect(messages[1]).toBe('This is a second valid test message');
     });
-    test('Validate special characters message send', async ({ page }) => {
-        const chatPage = new ChatPage(page);
+    test('Validate special characters message send', async ({ page, chatPage }) => {
         await setupMessageSendMock(page, { success: true });
         await chatPage.typeMessage('This is a valid test message with special characters: !@#$%^&*()');
         await chatPage.clickSend();
