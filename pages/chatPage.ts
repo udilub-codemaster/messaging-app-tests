@@ -13,10 +13,6 @@ export class ChatPage {
     return this.page.locator('#messageInput');
   }
 
-  async getMessageInputPlaceholder(): Promise<string | null> {
-    return this.messageInput.getAttribute('placeholder');
-  }
-
   get sendButton(): Locator {
     return this.page.locator('#sendBtn');
   }
@@ -36,9 +32,14 @@ export class ChatPage {
 
   async clickSend() {
     await this.sendButton.click();
+    console.log('Send button clicked');
   }
 
   async getMessages() {
     return this.messages.allTextContents();
+  }
+  
+  async getMessageInputPlaceholder(): Promise<string | null> {
+    return this.messageInput.getAttribute('placeholder');
   }
 }
