@@ -1,0 +1,17 @@
+{
+  "name": "messaging-app-tests",
+  "version": "1.0.0",
+  "description": "Playwright tests for CommBox messaging app",
+  "main": "index.js",
+  "scripts": {
+    "test": "npx playwright test"
+  },
+  "keywords": [],
+  "author": "Udi Lubarski",
+  "license": "ISC",
+  "type": "commonjs",
+  "devDependencies": {
+    "@playwright/test": "^1.58.2",
+    "@types/node": "^25.4.0"
+  }
+}

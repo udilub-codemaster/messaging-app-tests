@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Dummy Messaging App</title>
+</head>
+<body>
+  <h1>Simple Messenger</h1>
+  <input type="text" id="messageInput" placeholder="Type your message..." />
+  <button id="sendBtn">Send</button>
+  <ul id="messageList"></ul>
+
+  <script>
+    document.getElementById('sendBtn').addEventListener('click', async () => {
+      const input = document.getElementById('messageInput');
+      const message = input.value;
+      if (!message) return;
+
+      const response = await fetch('/api/send-message', {
+        method: 'POST',
+        body: JSON.stringify({ message }),
+        headers: { 'Content-Type': 'application/json' },
+      });
+
+      const data = await response.json();
+      if (data.success) {
+        const li = document.createElement('li');
+        li.innerText = data.message;
+        document.getElementById('messageList').appendChild(li);
+        input.value = '';
+      }
+    });
+  </script>
+</body>
+</html>
