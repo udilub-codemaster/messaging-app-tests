@@ -1,5 +1,4 @@
 import { Page, Locator } from '@playwright/test';
-import path from 'path';
 
 export class ChatPage {
   constructor(private page: Page) {
@@ -28,8 +27,7 @@ export class ChatPage {
   }
 
   async navigate() {
-    const filePath = `file://${path.resolve(__dirname, '../app/dummy-messaging-app.html')}`;
-    await this.page.goto(filePath);
+    await this.page.goto('/dummy-messaging-app.html');
   }
 
   async typeMessage(text: string) {
