@@ -1,6 +1,6 @@
-import { test, expect } from '../fixtures/baseTest';
-import { messagingConsts } from '../constants/messagingConsts';
-import { setupMessageSendMock } from '../mocks/messageSendMock';
+import { test, expect } from '@fixtures/baseTest';
+import { messagingConsts } from '@constants/messagingConsts';
+import { setupMessageSendMock } from '@mocks/messageSendMock';
 
 
 test.describe('Messaging App Tests', () => {

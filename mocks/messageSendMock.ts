@@ -1,5 +1,5 @@
 import { Page } from '@playwright/test';
-import { messagingConsts } from '../constants/messagingConsts';
+import { messagingConsts } from '@constants/messagingConsts';
 
 export interface MockOptions {
   success: boolean;
