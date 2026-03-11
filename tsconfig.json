@@ -12,7 +12,8 @@
       "@mocks/*": ["./mocks/*"],
       "@pages/*": ["./pages/*"],
       "@tests/*": ["./tests/*"],
-      "@app/*": ["./app/*"]
+      "@app/*": ["./app/*"],
+      "@utils/*": ["./utils/*"]
     }
   },
   "include": ["**/*.ts"]

@@ -6,6 +6,8 @@ export interface MockOptions {
   status?: number;
   responseBody?: { success: boolean; message?: string; error?: string };
   abort?: boolean;
+  /** Delay in ms before fulfilling the response. Use for testing rapid double-click scenarios. */
+  delayMs?: number;
 }
 
 const API_PATTERN = `**${messagingConsts.SEND_MESSAGE_API_PATH}`;
@@ -18,7 +20,7 @@ const API_PATTERN = `**${messagingConsts.SEND_MESSAGE_API_PATH}`;
  * @param options - Mock behavior: success/failure, status, response body, or abort
  */
 export async function setupMessageSendMock(page: Page, options: MockOptions): Promise<void> {
-  const { success, status, responseBody, abort } = options;
+  const { success, status, responseBody, abort, delayMs } = options;
 
   await page.route(API_PATTERN, async (route) => {
     if (route.request().method() !== 'POST') {
@@ -49,6 +51,10 @@ export async function setupMessageSendMock(page: Page, options: MockOptions): Pr
     } else {
       body = { success: false, error: 'Send failed' };
       statusCode = status ?? 500;
+    }
+
+    if (delayMs && delayMs > 0) {
+      await new Promise((resolve) => setTimeout(resolve, delayMs));
     }
 
     await route.fulfill({
