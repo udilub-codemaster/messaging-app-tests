@@ -84,7 +84,7 @@ This project was developed mainly using **Cursor** (AI-assisted editing and code
 
 - **Reporters**  
   - **HTML + JUnit:** Playwright’s built-in report for local debugging and CI artifacts; JUnit for tooling (e.g. Jenkins).  
-  - **Allure:** Extra reporting with steps, history, and environment info, as required by the assignment.
+  - **Allure:** Extra reporting with steps, history, and environment info.
 
 ---
 
