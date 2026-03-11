@@ -6,7 +6,9 @@
   "scripts": {
     "test": "npx playwright test",
     "test:sanity": "npx playwright test --project=sanity",
-    "test:full-regression": "npx playwright test --project=full-regression"
+    "test:full-regression": "npx playwright test --project=full-regression",
+    "report:playwright": "npx playwright show-report",
+    "report:allure": "npx allure generate allure-results -o allure-report --clean && npx allure open allure-report"
   },
   "keywords": [],
   "author": "Udi Lubarski",
@@ -14,6 +16,8 @@
   "type": "commonjs",
   "devDependencies": {
     "@playwright/test": "^1.58.2",
-    "@types/node": "^25.4.0"
+    "@types/node": "^25.4.0",
+    "allure-commandline": "^2.37.0",
+    "allure-playwright": "^3.6.0"
   }
 }

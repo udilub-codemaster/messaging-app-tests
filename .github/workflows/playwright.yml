@@ -18,6 +18,12 @@ jobs:
         with:
           node-version: lts/*
 
+      - name: Set up Java (for Allure)
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'temurin'
+          java-version: '17'
+
       - name: Cache npm
         uses: actions/cache@v4
         with:
@@ -55,4 +61,16 @@ jobs:
         with:
           name: test-results-full-regression
           path: test-results/
+          retention-days: 30
+
+      - name: Generate Allure report
+        if: ${{ !cancelled() }}
+        run: npx allure generate allure-results -o allure-report --clean
+
+      - name: Upload Allure report
+        uses: actions/upload-artifact@v4
+        if: ${{ !cancelled() }}
+        with:
+          name: allure-report
+          path: allure-report/
           retention-days: 30
