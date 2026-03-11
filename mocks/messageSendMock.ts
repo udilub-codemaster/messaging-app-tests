@@ -10,7 +10,7 @@ export interface MockOptions {
   delayMs?: number;
 }
 
-const API_PATTERN = `**${messagingConsts.SEND_MESSAGE_API_PATH}`;
+const API_PATTERN = `**${messagingConsts.api.SEND_MESSAGE_API_PATH}`;
 
 /**
  * Sets up a Playwright route to mock the send-message API.
