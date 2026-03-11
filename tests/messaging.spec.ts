@@ -3,19 +3,6 @@ import { messagingConsts } from '@constants/messagingConsts';
 import { setupMessageSendMock } from '@mocks/messageSendMock';
 import { delay } from '@utils/delay';
 
-/**
- * Test tags (use with --grep or --project):
- * @sanity          - Critical path; run on every commit / PR
- * @full-regression - Full regression suite (all tests)
- * @error-handling  - API/network failure scenarios
- * @edge-case       - Boundary, unicode, concurrency
- *
- * Examples:
- *   npx playwright test --project sanity
- *   npx playwright test --project full-regression
- *   npx playwright test --grep @error-handling
- */
-
 test.describe('Messaging App Tests', () => {
     test.describe('1. Smoke & Setup', { tag: ['@sanity', '@full-regression'] }, () => {
         test('Validate ui elements initial state', async ({ page, chatPage }) => {
@@ -133,7 +120,6 @@ test.describe('Messaging App Tests', () => {
             expect(messages[0]).toBe(messagingConsts.messages.VERY_LONG_MESSAGE);
         });
         test('Validate rapid double click on send button', async ({ page, chatPage }) => {
-            // Slow mock ensures both clicks fire before first response; app currently allows duplicate submissions (no debouncing)
             await setupMessageSendMock(page, { success: true, delayMs: messagingConsts.timing.MOCK_RESPONSE_DELAY_MS });
             await chatPage.typeMessage(messagingConsts.messages.FIRST_VALID_MESSAGE);
             await chatPage.clickSend();

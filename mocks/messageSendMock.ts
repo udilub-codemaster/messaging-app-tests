@@ -6,19 +6,11 @@ export interface MockOptions {
   status?: number;
   responseBody?: { success: boolean; message?: string; error?: string };
   abort?: boolean;
-  /** Delay in ms before fulfilling the response. Use for testing rapid double-click scenarios. */
   delayMs?: number;
 }
 
 const API_PATTERN = `**${messagingConsts.api.SEND_MESSAGE_API_PATH}`;
 
-/**
- * Sets up a Playwright route to mock the send-message API.
- * Call before navigation or before triggering the send action.
- *
- * @param page - Playwright page instance
- * @param options - Mock behavior: success/failure, status, response body, or abort
- */
 export async function setupMessageSendMock(page: Page, options: MockOptions): Promise<void> {
   const { success, status, responseBody, abort, delayMs } = options;
 
