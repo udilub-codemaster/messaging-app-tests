@@ -23,7 +23,10 @@ export default defineConfig({
   /* Opt out of parallel tests on CI. */
   workers: process.env.CI ? 1 : 1,
   /* Reporter to use. See https://playwright.dev/docs/test-reporters */
-  reporter: [['html', { open: 'never' }], ['junit', { outputFile: 'test-results/test-results.xml' }]],
+  reporter: [['html', { open: 'never' }],
+            ['junit', { outputFile: 'test-results/test-results.xml' }],
+            ['list', { printSteps: true }]
+  ],
   /* Shared settings for all the projects below. See https://playwright.dev/docs/api/class-testoptions. */
   use: {
     /* Base URL to use in actions like `await page.goto('')`. */
@@ -40,34 +43,25 @@ export default defineConfig({
     reuseExistingServer: !process.env.CI,
   },
 
-  /* Configure projects for major browsers */
+  /* Suite projects: sanity (fast), full-regression (all tests). Chrome only. */
   projects: [
     {
-      name: 'chromium',
-      use: { ...devices['Desktop Chrome'],
+      name: 'sanity',
+      grep: /@sanity/,
+      use: {
+        ...devices['Desktop Chrome'],
         headless: process.env.CI ? true : false,
-       }
-    }
+      },
+    },
+    {
+      name: 'full-regression',
+      grep: /@full-regression/,
+      use: {
+        ...devices['Desktop Chrome'],
+        headless: process.env.CI ? true : false,
+      },
+    },
 
-    /* Test against mobile viewports. */
-    // {
-    //   name: 'Mobile Chrome',
-    //   use: { ...devices['Pixel 5'] },
-    // },
-    // {
-    //   name: 'Mobile Safari',
-    //   use: { ...devices['iPhone 12'] },
-    // },
-
-    /* Test against branded browsers. */
-    // {
-    //   name: 'Microsoft Edge',
-    //   use: { ...devices['Desktop Edge'], channel: 'msedge' },
-    // },
-    // {
-    //   name: 'Google Chrome',
-    //   use: { ...devices['Desktop Chrome'], channel: 'chrome' },
-    // },
   ],
 
 });
